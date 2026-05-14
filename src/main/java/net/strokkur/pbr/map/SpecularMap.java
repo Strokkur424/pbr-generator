@@ -7,10 +7,10 @@ import net.strokkur.pbr.texture.TextureSource;
 public interface SpecularMap extends CacheSerializable {
 
   static SpecularMap fromTexture(TextureSource texture) {
-
+    throw new IllegalStateException("TODO");
   }
 
   static SpecularMap fromAtlas(TextureAtlasSource atlas) {
-
+    throw new IllegalStateException("TODO");
   }
 }

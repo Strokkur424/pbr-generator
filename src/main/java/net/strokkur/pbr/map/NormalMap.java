@@ -7,10 +7,10 @@ import net.strokkur.pbr.texture.TextureSource;
 public interface NormalMap extends CacheSerializable {
 
   static NormalMap fromTexture(TextureSource texture) {
-
+    throw new IllegalStateException("TODO");
   }
 
   static NormalMap fromAtlas(TextureAtlasSource atlas) {
-
+    throw new IllegalStateException("TODO");
   }
 }

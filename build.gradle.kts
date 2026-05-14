@@ -1,5 +1,6 @@
 plugins {
   id("java-library")
+  id("maven-publish")
   id("com.gradleup.shadow") version "9.4.1"
 }
 
@@ -18,6 +19,8 @@ dependencies {
 
 java {
   toolchain.languageVersion = JavaLanguageVersion.of(21)
+  withSourcesJar()
+  withJavadocJar()
 }
 
 tasks.test {
@@ -29,4 +32,29 @@ tasks.withType<Javadoc> {
     this.languageVersion = JavaLanguageVersion.of(25)
   })
   options.encoding = Charsets.UTF_8.name()
+}
+
+publishing {
+  repositories {
+    maven {
+      authentication {
+        credentials(PasswordCredentials::class) {
+          username = System.getenv("NEXUS_USERNAME")
+          password = System.getenv("NEXUS_PASSWORD")
+        }
+      }
+
+      name = "EldoNexus"
+      if (version.toString().endsWith("-SNAPSHOT")) {
+        setUrl("https://eldonexus.de/repository/maven-snapshots/")
+      } else {
+        setUrl("https://eldonexus.de/repository/maven-releases/")
+      }
+    }
+  }
+
+  publications.create<MavenPublication>("maven") {
+    from(components["java"])
+    withBuildIdentifier()
+  }
 }
