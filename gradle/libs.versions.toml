@@ -1,7 +1,11 @@
 [versions]
 junit = "6.0.0"
+zero-allocation-hashing = "0.27ea1"
 
 [libraries]
+jspecify = "org.jspecify:jspecify:1.0.0"
+zero-allocation-hashing = { module = "net.openhft:zero-allocation-hashing", version.ref = "zero-allocation-hashing" }
+
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
-junit-jupiter = { module = "org.junit.jupiter:junit-jupter" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
