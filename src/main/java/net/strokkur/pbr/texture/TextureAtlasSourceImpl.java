@@ -5,7 +5,7 @@ import net.strokkur.pbr.exceptions.InvalidDimensionsException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-class TextureAtlasSourceImpl implements TextureAtlasSource {
+final class TextureAtlasSourceImpl implements TextureAtlasSource {
   private final String key;
   private final SpriteDimension dimension;
   private final PixelSource[] splitSources;

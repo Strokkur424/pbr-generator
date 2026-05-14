@@ -3,7 +3,7 @@ package net.strokkur.pbr.internal.serializer;
 import net.strokkur.pbr.map.SpecularMap;
 
 // TODO: implement this
-class SpecularMapSerializer implements CacheSerializer<SpecularMap> {
+final class SpecularMapSerializer implements CacheSerializer<SpecularMap> {
   static SpecularMapSerializer INSTANCE = new SpecularMapSerializer();
 
   @Override

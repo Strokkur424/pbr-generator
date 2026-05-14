@@ -4,7 +4,7 @@ import net.strokkur.pbr.internal.serializer.CacheSerializable;
 
 import java.util.function.Supplier;
 
-class DelegatingCache<T extends CacheSerializable> implements PbrCache<T> {
+final class DelegatingCache<T extends CacheSerializable> implements PbrCache<T> {
   private final PbrCache<T>[] inner;
 
   public DelegatingCache(PbrCache<T>[] inner) {

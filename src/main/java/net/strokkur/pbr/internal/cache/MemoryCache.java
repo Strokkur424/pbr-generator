@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Supplier;
 
-class MemoryCache<T extends CacheSerializable> implements PbrCache<T> {
+final class MemoryCache<T extends CacheSerializable> implements PbrCache<T> {
   private final Map<CacheKey, T> cache = Collections.synchronizedMap(new TreeMap<>());
 
   @Override

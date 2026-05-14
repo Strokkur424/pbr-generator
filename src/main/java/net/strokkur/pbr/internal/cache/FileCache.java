@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-class FileCache<T extends CacheSerializable> implements PbrCache<T> {
+final class FileCache<T extends CacheSerializable> implements PbrCache<T> {
   private final Path path;
   private final CacheSerializer<T> serializer;
 

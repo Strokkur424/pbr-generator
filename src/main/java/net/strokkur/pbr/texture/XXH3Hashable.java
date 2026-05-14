@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public interface XXH3Hashable {
+interface XXH3Hashable {
   long hashWithXXH3();
 
   static long hashBufferedImage(BufferedImage img) throws IOException {

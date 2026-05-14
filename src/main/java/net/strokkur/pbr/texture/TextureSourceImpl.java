@@ -3,7 +3,7 @@ package net.strokkur.pbr.texture;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-class TextureSourceImpl implements TextureSource {
+final class TextureSourceImpl implements TextureSource {
   private final String key;
   private final BufferedImage bufferedImage;
   private final long xx3Hash;
