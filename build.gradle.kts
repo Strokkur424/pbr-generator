@@ -9,6 +9,7 @@ repositories {
 
 dependencies {
   api(libs.jspecify)
+  api(libs.jetbrains.annotations)
   api(libs.zero.allocation.hashing)
 }
 

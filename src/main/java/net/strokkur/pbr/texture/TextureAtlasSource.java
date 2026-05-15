@@ -47,4 +47,20 @@ public interface TextureAtlasSource extends XXH3Hashable {
   /// of the class and not cloned before being returned. Therefore, any operations
   /// on the array should be **strictly avoided**.
   PixelSource[] allSprites();
+
+  /// The horizontal width of the flattened 2D array returned from [#allSprites()].
+  int spritesArrayWidth();
+
+  /// The vertical height of the flattened 2D array returned from [#allSprites()].
+  int spritesArrayHeight();
+
+  /// Computes the total width of the image.
+  default int totalWidth() {
+    return spritesArrayWidth() * spriteDimension().x();
+  }
+
+  /// Computes the total height of the image.
+  default int totalHeight() {
+    return spritesArrayHeight() * spriteDimension().y();
+  }
 }

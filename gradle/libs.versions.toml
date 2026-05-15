@@ -1,9 +1,11 @@
 [versions]
 junit = "6.0.0"
+jetbrains-annotations = "24.1.0"
 zero-allocation-hashing = "0.27ea1"
 
 [libraries]
 jspecify = "org.jspecify:jspecify:1.0.0"
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
 zero-allocation-hashing = { module = "net.openhft:zero-allocation-hashing", version.ref = "zero-allocation-hashing" }
 
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
