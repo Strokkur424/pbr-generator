@@ -24,6 +24,9 @@ tasks.withType<Javadoc> {
     this.languageVersion = JavaLanguageVersion.of(25)
   })
   options.encoding = Charsets.UTF_8.name()
+  (options as StandardJavadocDocletOptions).tags(
+    "apiNote"
+  )
 }
 
 publishing {
