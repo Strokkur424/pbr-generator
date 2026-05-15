@@ -1,4 +1,4 @@
-# pbr-generator
+# 🚙 pbr-generator
 
 This is a simple library with the purpose of generating PBR (Physically Based Rendering) data from textures,
 with a focus on Minecraft assets.
