@@ -23,6 +23,8 @@ public class TestApp {
     "/textures/obsidian.png",
     "/textures/piston_side.png",
     "/textures/respawn_anchor_side4.png",
+
+    "/textures/bigger_img.png"
   };
 
   static void main() throws IOException {

@@ -40,21 +40,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /// When provided with a texture, `pbr-generator` can generate the following PBR properties:
 ///
 /// ### Normal maps
-/// The algorithm for generative normal maps works by detecting differences in color, both in the hue and
-/// the luminosity. Darker colors generally result in downward-facing normals, whilst lighter colors generally
-/// result in upward-facing normals. Hue-color-differences generally face away from one another.
-///
-/// This algorithm requires processing of each pixel against its immediate neighbors (only horizontal/vertical, diagonal
-/// pixels are disregarded). Typically, this would mean that for each pixel, about 4 other pixels need to be processed.
-/// One optimization solution for this is the temporary caching of neighboring pixel results. Starting from the
-/// top-left, each pixel only needs to freshly compute the values for its right/down neighbors, as the top/left neighbors
-/// had already done the processing in a previous iteration. This results in about 50% less processing, speeding up the
-/// normal generation process massively.
+/// For more details, see [NormalMap].
 ///
 /// ### Specular maps
-/// This implementation of specular-map generation operates purely on luminosity of the pixel. Dark pixels are treated
-/// as matte, whilst lighter pixels are treated as reflective. For a less linear gradient, this implementation uses
-/// a polynomial function for luminosity to specular mapping, resulting in more distinct values.
+/// For more details, see [SpecularMap].
 ///
 /// ## Caching
 /// This library supports caching. There are two types of caches, both of which are implemented using a combined value

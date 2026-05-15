@@ -51,4 +51,9 @@ record NormalMapImpl(
       | transformComponent(normal.y()) << 16
       | transformComponent(normal.z()) << 8;
   }
+
+  @Override
+  public boolean shouldCachePersistently() {
+    return width > 64 && height > 64;
+  }
 }

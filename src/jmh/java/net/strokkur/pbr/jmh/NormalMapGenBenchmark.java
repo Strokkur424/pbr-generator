@@ -1,18 +1,13 @@
 package net.strokkur.pbr.jmh;
 
-import net.strokkur.pbr.PbrGen;
-import net.strokkur.pbr.texture.TextureSource;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
@@ -27,20 +22,8 @@ public class NormalMapGenBenchmark {
     res.pbrGen.getNormal(res.textureCrafterNorth);
   }
 
-  @State(Scope.Benchmark)
-  public static class LoadedResources {
-    private final PbrGen pbrGen = PbrGen.standard();
-    private final TextureSource textureCrafterNorth;
-
-    {
-      try {
-        textureCrafterNorth = TextureSource.load(
-          "crafter_north",
-          Objects.requireNonNull(LoadedResources.class.getResource("/crafter_north.png"))
-        );
-      } catch (Exception e) {
-        throw new RuntimeException(e);
-      }
-    }
+  @Benchmark
+  public void benchmarkBiggerImg(LoadedResources res) {
+    res.pbrGen.getNormal(res.textureBiggerImage);
   }
 }

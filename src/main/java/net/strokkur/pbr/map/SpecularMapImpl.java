@@ -28,4 +28,9 @@ record SpecularMapImpl(
     }
     return out;
   }
+
+  @Override
+  public boolean shouldCachePersistently() {
+    return width > 64 && height > 64;
+  }
 }

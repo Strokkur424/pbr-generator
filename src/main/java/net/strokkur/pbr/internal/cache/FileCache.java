@@ -39,7 +39,11 @@ final class FileCache<T extends CacheSerializable> implements PbrCache<T> {
       }
 
       final T value = supplier.get();
-      Files.write(filePath, serializer.serialize(value));
+      // If the texture is so small that the time it takes to read the texture from disk
+      // is equivalent to generating it anew, don't save it to disk.
+      if (value.shouldCachePersistently()) {
+        Files.write(filePath, serializer.serialize(value));
+      }
       return value;
     } catch (IOException e) {
       throw new RuntimeException(e);

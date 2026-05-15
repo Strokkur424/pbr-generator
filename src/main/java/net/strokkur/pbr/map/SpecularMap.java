@@ -8,6 +8,9 @@ import org.jetbrains.annotations.ApiStatus;
 
 import java.awt.image.BufferedImage;
 
+/// This implementation of specular-map generation operates purely on luminance of the pixel. Dark pixels are treated
+/// as matte, whilst lighter pixels are treated as reflective. For a less linear gradient, this implementation uses
+/// a logarithmic function for luminance to specular mapping, resulting in more distinct values.
 public interface SpecularMap extends CacheSerializable {
 
   /// You should call [PbrGen#getSpecular(TextureSource)] instead of calling
