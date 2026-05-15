@@ -19,7 +19,7 @@ dependencies {
 
 ## Currently supported (and planned) generators:
 
-- [ ] Normal
+- [x] Normal
 - [ ] Specular
 
 ## Library usage
