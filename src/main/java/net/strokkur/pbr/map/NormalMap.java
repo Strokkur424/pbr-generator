@@ -6,6 +6,8 @@ import net.strokkur.pbr.texture.TextureAtlasSource;
 import net.strokkur.pbr.texture.TextureSource;
 import org.jetbrains.annotations.ApiStatus;
 
+/// The normal map generation is based on the [Sobel Operator](https://en.wikipedia.org/wiki/Sobel_operator).
+/// The code implementation is based on GManNickG's [stack overflow answer](https://stackoverflow.com/a/2368794).
 public interface NormalMap extends CacheSerializable {
 
   /// You should call [PbrGen#getNormal(TextureSource)] instead of calling

@@ -7,6 +7,7 @@ import org.jspecify.annotations.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /// A cache avoids repetitive calculations by first attempting to fetch precomputed results
@@ -15,7 +16,7 @@ public interface PbrCache<T extends CacheSerializable> {
 
   /// Creates a new file-system backed cache.
   static <T extends CacheSerializable> PbrCache<T> createFileCache(Path path, CacheSerializer<T> serializer)
-      throws IOException {
+    throws IOException {
     return new FileCache<>(path, serializer);
   }
 
@@ -34,7 +35,9 @@ public interface PbrCache<T extends CacheSerializable> {
   /// list creation.
   static <T extends CacheSerializable> PbrCache<T> createDelegatingCache(List<@Nullable PbrCache<T>> nested) {
     //noinspection unchecked
-    return new DelegatingCache<>(nested.toArray(PbrCache[]::new));
+    return new DelegatingCache<>(nested.stream()
+      .filter(Objects::nonNull)
+      .toArray(PbrCache[]::new));
   }
 
   /// Gets a stored value from the cache with the provided key-hash-pair.

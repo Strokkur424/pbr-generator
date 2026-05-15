@@ -1,8 +1,11 @@
 package net.strokkur.pbr.test;
 
 import net.strokkur.pbr.PbrGen;
+import net.strokkur.pbr.map.NormalMap;
 import net.strokkur.pbr.texture.TextureSource;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -39,7 +42,25 @@ public class TestApp {
       }
 
       final TextureSource source = TextureSource.load(texture, url);
-      // Continuation follows...
+      final NormalMap normalMap = pbrGen.getNormal(source);
+
+      final BufferedImage img = normalToImage(normalMap);
+
+      final String[] splitPath = texture.split("/");
+      final String[] splitName = splitPath[splitPath.length - 1].split("\\.");
+
+      ImageIO.write(img, "png", targetFolder.resolve(splitName[0] + ".png").toFile());
     }
+  }
+
+  private static BufferedImage normalToImage(NormalMap map) {
+    final BufferedImage img = new BufferedImage(map.width(), map.height(), BufferedImage.TYPE_INT_RGB);
+    for (int x = 0; x < map.width(); x++) {
+      for (int y = 0; y < map.height(); y++) {
+        final int dataAt = map.rgbaAt(x, y);
+        img.setRGB(x, y, dataAt >> 8 & 0xFFFFFF);
+      }
+    }
+    return img;
   }
 }
