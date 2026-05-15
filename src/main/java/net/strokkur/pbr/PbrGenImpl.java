@@ -9,6 +9,7 @@ import net.strokkur.pbr.texture.TextureSource;
 import org.jspecify.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 final class PbrGenImpl implements PbrGen {
@@ -21,7 +22,6 @@ final class PbrGenImpl implements PbrGen {
   private final @Nullable PbrCache<NormalMap> fileNormalCache;
   private final @Nullable PbrCache<SpecularMap> fileSpecularCache;
 
-  @SuppressWarnings("DataFlowIssue")
   PbrGenImpl(PbrGenOptions options) throws IOException {
     this.inMemoryNormalCache = options.enableInMemoryCache() ? PbrCache.createMemoryCache() : null;
     this.inMemorySpecularCache = options.enableInMemoryCache() ? PbrCache.createMemoryCache() : null;
@@ -33,8 +33,8 @@ final class PbrGenImpl implements PbrGen {
         ? PbrCache.createFileCache(options.cacheDir().resolve("specular"), CacheSerializer.specular())
         : null;
 
-    this.normalCache = PbrCache.createDelegatingCache(List.of(inMemoryNormalCache, fileNormalCache));
-    this.specularCache = PbrCache.createDelegatingCache(List.of(inMemorySpecularCache, fileSpecularCache));
+    this.normalCache = PbrCache.createDelegatingCache(Arrays.asList(inMemoryNormalCache, fileNormalCache));
+    this.specularCache = PbrCache.createDelegatingCache(Arrays.asList(inMemorySpecularCache, fileSpecularCache));
   }
 
   @Override

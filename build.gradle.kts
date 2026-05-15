@@ -1,7 +1,6 @@
 plugins {
   id("java-library")
   id("maven-publish")
-  id("com.gradleup.shadow") version "9.4.1"
 }
 
 repositories {
@@ -11,20 +10,12 @@ repositories {
 dependencies {
   api(libs.jspecify)
   api(libs.zero.allocation.hashing)
-
-  testImplementation(platform(libs.junit.bom))
-  testImplementation(libs.junit.jupiter)
-  testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 java {
   toolchain.languageVersion = JavaLanguageVersion.of(21)
   withSourcesJar()
   withJavadocJar()
-}
-
-tasks.test {
-  useJUnitPlatform()
 }
 
 tasks.withType<Javadoc> {
