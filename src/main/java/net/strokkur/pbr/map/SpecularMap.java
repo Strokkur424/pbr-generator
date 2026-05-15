@@ -1,19 +1,32 @@
 package net.strokkur.pbr.map;
 
+import net.strokkur.pbr.PbrGen;
 import net.strokkur.pbr.internal.serializer.CacheSerializable;
 import net.strokkur.pbr.texture.TextureAtlasSource;
 import net.strokkur.pbr.texture.TextureSource;
+import org.jetbrains.annotations.ApiStatus;
 
 public interface SpecularMap extends CacheSerializable {
 
+  /// You should call [PbrGen#getSpecular(TextureSource)] instead of calling
+  /// this method directly.
+  @ApiStatus.Internal
   static SpecularMap fromTexture(TextureSource texture) {
-    throw new IllegalStateException("TODO");
+    return new SpecularMapImpl(
+      SpecularMapImpl.dataFor(texture),
+      texture.width(),
+      texture.height()
+    );
   }
 
+  /// You should call [PbrGen#getSpecular(TextureAtlasSource)] instead of calling
+  /// this method directly.
+  @ApiStatus.Internal
   static SpecularMap fromAtlas(TextureAtlasSource atlas) {
     throw new IllegalStateException("TODO");
   }
 
+  @ApiStatus.Internal
   static SpecularMap direct(byte[] array, int width, int height) {
     return new SpecularMapImpl(array, width, height);
   }
