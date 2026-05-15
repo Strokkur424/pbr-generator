@@ -51,8 +51,8 @@ public class TestApp {
       final NormalMap normalMap = pbrGen.getNormal(source);
       final SpecularMap specularMap = pbrGen.getSpecular(source);
 
-      final BufferedImage normalImg = normalToImage(normalMap);
-      final BufferedImage specularImg = specularToImage(specularMap);
+      final BufferedImage normalImg = normalMap.toBufferedImage();
+      final BufferedImage specularImg = specularMap.toBufferedImage();
 
       final String[] splitPath = texture.split("/");
       final String[] splitName = splitPath[splitPath.length - 1].split("\\.");
@@ -60,28 +60,5 @@ public class TestApp {
       ImageIO.write(normalImg, "png", normalFolder.resolve(splitName[0] + ".png").toFile());
       ImageIO.write(specularImg, "png", specularFolder.resolve(splitName[0] + ".png").toFile());
     }
-  }
-
-  private static BufferedImage normalToImage(NormalMap map) {
-    final BufferedImage img = new BufferedImage(map.width(), map.height(), BufferedImage.TYPE_INT_RGB);
-    for (int x = 0; x < map.width(); x++) {
-      for (int y = 0; y < map.height(); y++) {
-        final int dataAt = map.rgbaAt(x, y);
-        img.setRGB(x, y, dataAt >> 8 & 0xFFFFFF);
-      }
-    }
-    return img;
-  }
-
-  private static BufferedImage specularToImage(SpecularMap map) {
-    final BufferedImage img = new BufferedImage(map.width(), map.height(), BufferedImage.TYPE_INT_RGB);
-    for (int x = 0; x < map.width(); x++) {
-      for (int y = 0; y < map.height(); y++) {
-        final byte value = map.valueAt(x, y);
-        final int rgb = ((value & 0xFF) << 16) | ((value & 0xFF) << 8) | (value & 0xFF);
-        img.setRGB(x, y, rgb);
-      }
-    }
-    return img;
   }
 }

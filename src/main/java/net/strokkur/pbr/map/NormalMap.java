@@ -6,6 +6,8 @@ import net.strokkur.pbr.texture.TextureAtlasSource;
 import net.strokkur.pbr.texture.TextureSource;
 import org.jetbrains.annotations.ApiStatus;
 
+import java.awt.image.BufferedImage;
+
 /// The normal map generation is based on the [Sobel Operator](https://en.wikipedia.org/wiki/Sobel_operator).
 /// The code implementation is based on GManNickG's [stack overflow answer](https://stackoverflow.com/a/2368794).
 public interface NormalMap extends CacheSerializable {
@@ -76,5 +78,18 @@ public interface NormalMap extends CacheSerializable {
   /// @see #width()
   default int rgbaAt(int u, int v) {
     return rgbaData()[u + v * width()];
+  }
+
+  /// Creates a [BufferedImage] out of this normal map.
+  /// Useful when saving this texture as a viewable image to disk.
+  default BufferedImage toBufferedImage() {
+    final BufferedImage img = new BufferedImage(width(), height(), BufferedImage.TYPE_INT_RGB);
+    for (int x = 0; x < width(); x++) {
+      for (int y = 0; y < height(); y++) {
+        final int dataAt = rgbaAt(x, y);
+        img.setRGB(x, y, dataAt >> 8 & 0xFFFFFF);
+      }
+    }
+    return img;
   }
 }

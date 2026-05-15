@@ -6,6 +6,8 @@ import net.strokkur.pbr.texture.TextureAtlasSource;
 import net.strokkur.pbr.texture.TextureSource;
 import org.jetbrains.annotations.ApiStatus;
 
+import java.awt.image.BufferedImage;
+
 public interface SpecularMap extends CacheSerializable {
 
   /// You should call [PbrGen#getSpecular(TextureSource)] instead of calling
@@ -65,5 +67,19 @@ public interface SpecularMap extends CacheSerializable {
   /// @see #width()
   default byte valueAt(int u, int v) {
     return data()[u + v * width()];
+  }
+
+  /// Creates a [BufferedImage] out of this specular map.
+  /// Useful for saving this texture as a viewable image to disk.s
+  default BufferedImage toBufferedImage() {
+    final BufferedImage img = new BufferedImage(width(), height(), BufferedImage.TYPE_INT_RGB);
+    for (int x = 0; x < width(); x++) {
+      for (int y = 0; y < height(); y++) {
+        final byte value = valueAt(x, y);
+        final int rgb = ((value & 0xFF) << 16) | ((value & 0xFF) << 8) | (value & 0xFF);
+        img.setRGB(x, y, rgb);
+      }
+    }
+    return img;
   }
 }
