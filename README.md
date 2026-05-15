@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-  // Replacee <version> with the latest version. See the release tab.
+  // Replace <version> with the latest version. See the GitHub Releases tab.
   implementation("net.strokkur:pbr-generator:<version>")
 }
 ```
@@ -49,12 +49,16 @@ are published alongside the normal dependency artifact, so you should be able to
 
 General usage looks like this (example: normal map generation):
 ```java
-// Obtain a texture source.
+// Get a texture source.
 final TextureSource source = TextureSource.load("stone", assetDir.resolve("stone.png"));
+
 // Pass the source to PbrGen#getNormal. This first tries to load from the cache,
 // generating the normal map only if it fails.
 final NormalMap normal = PBR_GEN.getNormal(source);
-// You can now upload the normal map to your GPU buffer. Details follow...
+
+// You can now get the RGBA pixel data for the generated normal map and
+// continue processing these (write to file or upload to GPU).
+final int[] normalPixels = normal.rgbaData();
 ```
 
 ## License
