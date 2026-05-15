@@ -41,7 +41,7 @@ public class TestApp {
         continue;
       }
 
-      final TextureSource source = TextureSource.load(texture, url);
+      final TextureSource source = TextureSource.load(texture.replace("/", ""), url);
       final NormalMap normalMap = pbrGen.getNormal(source);
 
       final BufferedImage img = normalToImage(normalMap);

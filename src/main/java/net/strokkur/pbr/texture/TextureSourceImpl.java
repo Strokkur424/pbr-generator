@@ -9,6 +9,11 @@ final class TextureSourceImpl implements TextureSource {
   private final long xx3Hash;
 
   TextureSourceImpl(String key, BufferedImage bufferedImage) {
+    // Ensure the key contains no (back)slash characters.
+    if (key.contains("/") || key.contains("\\")) {
+      throw new IllegalArgumentException("The key must not contained and (back)slash characters.");
+    }
+
     this.key = key;
     this.bufferedImage = bufferedImage;
     try {

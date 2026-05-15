@@ -14,6 +14,11 @@ final class TextureAtlasSourceImpl implements TextureAtlasSource {
   private final long xx3Hash;
 
   TextureAtlasSourceImpl(String key, SpriteDimension dimension, BufferedImage bufferedImage) throws InvalidDimensionsException {
+    // Ensure the key contains no (back)slash characters.
+    if (key.contains("/") || key.contains("\\")) {
+      throw new IllegalArgumentException("The key must not contained and (back)slash characters.");
+    }
+
     this.key = key;
     this.dimension = dimension;
 
